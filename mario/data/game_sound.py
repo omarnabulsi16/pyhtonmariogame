@@ -81,5 +81,5 @@ class Sound(object):
         self.state = state
 
     def stop_music(self):
-        #tops playback
+        #stops playback
         pg.mixer.music.stop()
