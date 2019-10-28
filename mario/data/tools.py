@@ -10,9 +10,8 @@ keybinding = {
 }
 
 class Control(object):
-    """Control class for entire project. Contains the game loop, and contains
-    the event_loop which passes events to States as needed. Logic for flipping
-    states is also found here."""
+    #Control class for entire project, game loop, and contains.
+    #the event_loop which passes events to States as needed. 
     def __init__(self, caption):
         self.screen = pg.display.get_surface()
         self.done = False
@@ -64,7 +63,7 @@ class Control(object):
                 pg.display.set_caption(self.caption)
 
     def main(self):
-        """Main loop for entire program"""
+        #main loop
         while not self.done:
             self.event_loop()
             self.update()
@@ -74,7 +73,6 @@ class Control(object):
                 fps = self.clock.get_fps()
                 with_fps = "{} - {:.2f} FPS".format(self.caption, fps)
                 pg.display.set_caption(with_fps)
-
 
 class _State(object):
     def __init__(self):
@@ -132,14 +130,3 @@ def load_all_sfx(directory, accept=('.wav','.mpe','.ogg','.mdi')):
         if ext.lower() in accept:
             effects[name] = pg.mixer.Sound(os.path.join(directory, fx))
     return effects
-
-
-
-
-
-
-
-
-
-
-
