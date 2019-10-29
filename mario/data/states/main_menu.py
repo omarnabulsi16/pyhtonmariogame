@@ -78,8 +78,6 @@ class Menu(tools._State):
         input_list = [pg.K_RETURN, pg.K_a, pg.K_s]
         if self.cursor.state == c.PLAYER1:
             self.cursor.rect.y = 358
-            if keys[pg.K_DOWN]:
-                self.cursor.state = c.PLAYER2
             for input in input_list:
                 if keys[input]:
                     self.reset_game_info()
