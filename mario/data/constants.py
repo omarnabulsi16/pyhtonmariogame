@@ -108,7 +108,6 @@ ONEUP = '379'
 
 #main menu
 PLAYER1 = '1 player'
-PLAYER2 = '2 player'
 
 #info states
 MAIN_MENU = 'main menu'
