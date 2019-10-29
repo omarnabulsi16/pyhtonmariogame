@@ -187,7 +187,7 @@ class OverheadInfo(object):
         if self.state == c.MAIN_MENU:
             self.score = level_info[c.SCORE]
             self.update_score_images(self.score_images, self.score)
-            self.update_score_images(self.main_menu_labels[3], self.top_score)
+            self.update_score_images(self.main_menu_labels[2], self.top_score)
             self.update_coin_total(level_info)
             self.flashing_coin.update(level_info[c.CURRENT_TIME])
         elif self.state == c.LOAD_SCREEN:
