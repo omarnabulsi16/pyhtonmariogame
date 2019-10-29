@@ -17,15 +17,15 @@ class LoadScreen(tools._State):
         self.sound_manager = game_sound.Sound(self.overhead_info)
 
     def set_next_state(self):
-        """Sets the next state"""
+        #Set the next state
         return c.LEVEL1
 
     def set_overhead_info_state(self):
-        """sets the state to send to the overhead info object"""
+        #set state to send to the overhead info object
         return c.LOAD_SCREEN
 
     def update(self, surface, keys, current_time):
-        """Updates the loading screen"""
+        #updates loading screen
         if (current_time - self.start_time) < 2400:
             surface.fill(c.BLACK)
             self.overhead_info.update(self.game_info)
@@ -38,16 +38,16 @@ class LoadScreen(tools._State):
             self.done = True
 
 class GameOver(LoadScreen):
-    """A loading screen with Game Over"""
+    #loading screen with Game Over
     def __init__(self):
         super(GameOver, self).__init__()
 
     def set_next_state(self):
-        """Sets next state"""
+        #Set next state
         return c.MAIN_MENU
 
     def set_overhead_info_state(self):
-        """sets the state to send to the overhead info object"""
+        #set the state to send to the overhead info object
         return c.GAME_OVER
 
     def update(self, surface, keys, current_time):
@@ -66,24 +66,23 @@ class GameOver(LoadScreen):
             self.done = True
 
 class TimeOut(LoadScreen):
-    """Loading Screen with Time Out"""
+    #Loading Screen with Time Out
     def __init__(self):
         super(TimeOut, self).__init__()
 
     def set_next_state(self):
-        """Sets next state"""
+        #set next state
         if self.persist[c.LIVES] == 0:
             return c.GAME_OVER
         else:
             return c.LOAD_SCREEN
 
     def set_overhead_info_state(self):
-        """Sets the state to send to the overhead info object"""
+        #Set the state to send to the overhead info object
         return c.TIME_OUT
 
     def update(self, surface, keys, current_time):
         self.current_time = current_time
-
         if (self.current_time - self.start_time) < 2400:
             surface.fill(c.BLACK)
             self.overhead_info.update(self.game_info)
