@@ -39,7 +39,7 @@ class Brick(pg.sprite.Sprite):
         return image
 
     def setup_frames(self):
-        Set frames to a list
+        #set frames to a list
         self.frames.append(self.get_image(16, 0, 16, 16))
         self.frames.append(self.get_image(432, 0, 16, 16))
 
