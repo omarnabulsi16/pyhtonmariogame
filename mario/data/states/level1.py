@@ -422,8 +422,6 @@ class Level1(tools._State):
             else:
                 self.mario.start_death_jump(self.game_info)
                 self.state = c.FROZEN
-        elif shell:
-            self.adjust_mario_for_x_shell_collisions(shell)
         elif powerup:
             if powerup.name == c.STAR:
                 self.game_info[c.SCORE] += 1000
@@ -485,38 +483,6 @@ class Level1(tools._State):
         else:
             self.mario.rect.left = collider.rect.right
         self.mario.x_vel = 0
-
-    def adjust_mario_for_x_shell_collisions(self, shell):
-        #Deals with Mario if he hits a shell moving on the x axis
-        if shell.state == c.JUMPED_ON:
-            if self.mario.rect.x < shell.rect.x:
-                self.game_info[c.SCORE] += 400
-                self.moving_score_list.append(
-                    score.Score(shell.rect.centerx - self.viewport.x,shell.rect.y,400))
-                self.mario.rect.right = shell.rect.left
-                shell.direction = c.RIGHT
-                shell.x_vel = 5
-                shell.rect.x += 5
-            else:
-                self.mario.rect.left = shell.rect.right
-                shell.direction = c.LEFT
-                shell.x_vel = -5
-                shell.rect.x += -5
-            shell.state = c.SHELL_SLIDE
-        elif shell.state == c.SHELL_SLIDE:
-            if self.mario.big and not self.mario.invincible:
-                self.mario.state = c.BIG_TO_SMALL
-            elif self.mario.invincible:
-                self.game_info[c.SCORE] += 200
-                self.moving_score_list.append(
-                    score.Score(shell.rect.right - self.viewport.x,shell.rect.y, 200))
-                shell.kill()
-                self.sprites_about_to_die_group.add(shell)
-                shell.start_death_jump(c.RIGHT)
-            else:
-                if not self.mario.hurt_invincible and not self.mario.invincible:
-                    self.state = c.FROZEN
-                    self.mario.start_death_jump(self.game_info)
 
     def check_mario_y_collisions(self):
         #checks for collisions when Mario moves along y-axis
@@ -809,19 +775,6 @@ class Level1(tools._State):
             enemy.kill()
             self.sprites_about_to_die_group.add(enemy)
             enemy.start_death_jump(shell.direction)
-
-    def check_shell_y_collisions(self, shell):
-        #Shell collisions along y axis
-        collider = pg.sprite.spritecollideany(shell, self.ground_step_pipe_group)
-        if collider:
-            shell.y_vel = 0
-            shell.rect.bottom = collider.rect.top
-            shell.state = c.SHELL_SLIDE
-        else:
-            shell.rect.y += 1
-            if pg.sprite.spritecollideany(shell, self.ground_step_pipe_group) is None:
-                shell.state = c.FALL
-            shell.rect.y -= 1
 
     def adjust_powerup_position(self):
         #Moves mushrooms, stars and fireballs along the x, y axes
