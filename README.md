@@ -2,4 +2,4 @@
 
 Controls:
   - arrow keys to move and jump 
-  - 'space bar' to shoot fireballs
+  - space bar to shoot fireballs
