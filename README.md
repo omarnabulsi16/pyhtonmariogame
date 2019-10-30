@@ -1,6 +1,5 @@
 # Python Mario Game
 
 Controls:
-  - left and right arrow keys to move
-  - 'a' to jump
-  - 's' to shoot fireballs
+  - arrow keys to move and jump 
+  - 'space bar' to shoot fireballs
