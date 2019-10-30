@@ -541,8 +541,6 @@ class Level1(tools._State):
                 enemy.start_death_jump(c.RIGHT)
             else:
                 self.adjust_mario_for_y_enemy_collisions(enemy)
-        elif shell:
-            self.adjust_mario_for_y_shell_collisions(shell)
         elif powerup:
             if powerup.name == c.STAR:
                 setup.SFX['powerup'].play()
@@ -685,24 +683,6 @@ class Level1(tools._State):
             self.mario.rect.bottom = enemy.rect.top
             self.mario.state = c.JUMP
             self.mario.y_vel = -7
-
-    def adjust_mario_for_y_shell_collisions(self, shell):
-        #Mario collisions with Koopas in their shells on y axis
-        if self.mario.y_vel > 0:
-            self.game_info[c.SCORE] += 400
-            self.moving_score_list.append(
-                score.Score(self.mario.rect.centerx - self.viewport.x, self.mario.rect.y, 400))
-            if shell.state == c.JUMPED_ON:
-                setup.SFX['kick'].play()
-                shell.state = c.SHELL_SLIDE
-                if self.mario.rect.centerx < shell.rect.centerx:
-                    shell.direction = c.RIGHT
-                    shell.rect.left = self.mario.rect.right + 5
-                else:
-                    shell.direction = c.LEFT
-                    shell.rect.right = self.mario.rect.left - 5
-            else:
-                shell.state = c.JUMPED_ON
 
     def adjust_enemy_position(self):
         #moves all enemies along the x, y axes and check for collisions
