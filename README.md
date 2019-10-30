@@ -1,4 +1,4 @@
-# Pyhton Mario Game
+# Python Mario Game
 
 Controls:
   - left and right arrow keys to move
