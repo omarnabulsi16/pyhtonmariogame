@@ -752,7 +752,6 @@ class Level1(tools._State):
             shell.rect.x += shell.x_vel
             self.check_shell_x_collisions(shell)
             shell.rect.y += shell.y_vel
-            self.check_shell_y_collisions(shell)
             self.delete_if_off_screen(shell)
 
     def check_shell_x_collisions(self, shell):
