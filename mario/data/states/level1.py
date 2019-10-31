@@ -253,7 +253,6 @@ class Level1(tools._State):
         #updates Entire level using states.  Called by control object
         self.game_info[c.CURRENT_TIME] = self.current_time = current_time
         self.handle_states(keys)
-        self.check_if_time_out()
         self.blit_everything(surface)
         self.sound_manager.update(self.game_info, self.mario)
 
@@ -991,20 +990,10 @@ class Level1(tools._State):
         elif self.mario.dead == False:
             self.next = c.MAIN_MENU
             self.game_info[c.CAMERA_START_X] = 0
-        elif self.overhead_info_display.time == 0:
-            self.next = c.TIME_OUT
         else:
             if self.mario.rect.x > 3670 and self.game_info[c.CAMERA_START_X] == 0:
                 self.game_info[c.CAMERA_START_X] = 3440
             self.next = c.LOAD_SCREEN
-
-    def check_if_time_out(self):
-        #Check if time is 0
-        if self.overhead_info_display.time <= 0 \
-                and not self.mario.dead \
-                and not self.mario.in_castle:
-            self.state = c.FROZEN
-            self.mario.start_death_jump(self.game_info)
 
     def update_viewport(self):
         #changes view of camera
@@ -1026,7 +1015,6 @@ class Level1(tools._State):
         if self.overhead_info_display.state == c.END_OF_LEVEL:
             self.state = c.FLAG_AND_FIREWORKS
             self.flag_pole_group.add(castle_flag.Flag(8745, 322))
-
 
     def update_flag_and_fireworks(self):
         #Updates the level for the fireworks and castle flag
@@ -1061,7 +1049,6 @@ class Level1(tools._State):
         self.brick_pieces_group.draw(self.level)
         self.flag_pole_group.draw(self.level)
         self.mario_and_enemy_group.draw(self.level)
-
         surface.blit(self.level, (0,0), self.viewport)
         self.overhead_info_display.draw(surface)
         for score in self.moving_score_list:
