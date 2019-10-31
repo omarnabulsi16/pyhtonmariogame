@@ -162,11 +162,6 @@ class OverheadInfo(object):
         self.create_label(over_label, 'OVER', 400, 300)
         self.game_over_label = [game_label, over_label]
 
-    def create_time_out_label(self):
-        time_out_label = []
-        self.create_label(time_out_label, 'TIME OUT', 290, 310)
-        self.time_out_label = [time_out_label]
-
     def create_main_menu_labels(self):
         player_one_game = []
         player_two_game = []
@@ -204,10 +199,6 @@ class OverheadInfo(object):
                 self.update_count_down_clock(level_info)
             self.update_coin_total(level_info)
             self.flashing_coin.update(level_info[c.CURRENT_TIME])
-        elif self.state == c.TIME_OUT:
-            self.score = level_info[c.SCORE]
-            self.update_score_images(self.score_images, self.score)
-            self.update_coin_total(level_info)
         elif self.state == c.GAME_OVER:
             self.score = level_info[c.SCORE]
             self.update_score_images(self.score_images, self.score)
@@ -279,8 +270,6 @@ class OverheadInfo(object):
             self.draw_level_screen_info(surface)
         elif self.state == c.END_OF_LEVEL:
             self.draw_level_screen_info(surface)
-        elif self.state == c.TIME_OUT:
-            self.draw_time_out_screen_info(surface)
         else:
             pass
 
@@ -334,20 +323,6 @@ class OverheadInfo(object):
         for info in self.score_images:
             surface.blit(info.image, info.rect)
         for word in self.game_over_label:
-            for letter in word:
-                surface.blit(letter.image, letter.rect)
-        for character in self.coin_count_images:
-            surface.blit(character.image, character.rect)
-        for label in self.label_list:
-            for letter in label:
-                surface.blit(letter.image, letter.rect)
-        surface.blit(self.flashing_coin.image, self.flashing_coin.rect)
-
-    def draw_time_out_screen_info(self, surface):
-        #draw info when on the time out screen
-        for info in self.score_images:
-            surface.blit(info.image, info.rect)
-        for word in self.time_out_label:
             for letter in word:
                 surface.blit(letter.image, letter.rect)
         for character in self.coin_count_images:
