@@ -168,8 +168,8 @@ class OverheadInfo(object):
         top = []
         top_score = []
         self.create_label(player_one_game, '1 PLAYER GAME', 272, 360)
-        self.create_label(top, 'TOP - ', 290, 465)
-        self.create_label(top_score, ' 0000', 400, 465)
+        self.create_label(top, 'HI SCORE - ', 175, 450)
+        self.create_label(top_score, ' 00000', 400, 450)
         self.main_menu_labels = [player_one_game, player_two_game,top, top_score]
 
     def update(self, level_info, mario=None):
