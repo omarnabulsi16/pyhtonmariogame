@@ -23,6 +23,7 @@ class Flag(pg.sprite.Sprite):
         image.set_colorkey(c.BLACK)
         image = pg.transform.scale(image,(int(rect.width*c.SIZE_MULTIPLIER),int(rect.height*c.SIZE_MULTIPLIER)))
         return image
+    
     def update(self, *args):
         if self.state == 'rising':
             self.rising()
